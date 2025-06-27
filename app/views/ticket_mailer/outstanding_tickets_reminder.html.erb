@@ -1,0 +1,10 @@
+<h1>Hello <%= @agent.firstname %>,</h1>
+<p>You currently have <%= @tickets.count %> unresolved tickets:</p>
+<ul>
+  <% @tickets.each do |ticket| %>
+    <li>
+      <strong><%= ticket.title %></strong> - Deadline: <%= ticket.deadline.strftime("%B %d, %Y") %>
+    </li>
+  <% end %>
+</ul>
+<p>Please attend to them as soon as possible.</p>

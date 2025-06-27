@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  content: MyText
+  created_by: one
+  assigned_to: one
+  media: MyText
+  deadline: 2025-06-26 15:05:32
+  status: MyString
+  has_user_deleted: false
+
+two:
+  title: MyString
+  content: MyText
+  created_by: two
+  assigned_to: two
+  media: MyText
+  deadline: 2025-06-26 15:05:32
+  status: MyString
+  has_user_deleted: false

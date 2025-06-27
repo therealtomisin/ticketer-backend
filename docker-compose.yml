@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:17
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ticketer_development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Timilehin123#
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    command: bash -c "bundle exec rails db:prepare && bundle exec rails s -b 0.0.0.0"
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/ticketer_development
+
+volumes:
+  pgdata:
