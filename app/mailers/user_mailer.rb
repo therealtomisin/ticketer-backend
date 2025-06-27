@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: "oluwatimilehineribake@gmail.com"
+  default from: ENV["SENDER_EMAIL"]
 
   def account_verification(user)
     @user = user

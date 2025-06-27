@@ -60,13 +60,14 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    user_name: "ae7a25cddf93ba",
-    password: "60fff4dfba9bee",
-    address: "sandbox.smtp.mailtrap.io",
-    host: "sandbox.smtp.mailtrap.io",
-    port: "2525",
+    user_name: ENV["MAILGUN_USER"],
+    password: ENV["MAILGUN_PASSWORD"],
+    address: ENV["MAILGUN_ADDRESS"],
+    host: ENV["MAILGUN_HOST"],
+    port: ENV["MAILGUN_PORT"],
     authentication: :login
   }
+
 
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "example.com" }
