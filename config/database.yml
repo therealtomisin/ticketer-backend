@@ -83,6 +83,12 @@ test:
 #
 production:
   url: <%= ENV["DATABASE_URL"] %>
+
+  queue:
+    adapter: postgresql
+    encoding: unicode
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: 5
   # primary: &primary_production
   #   <<: *default
   #   database: ticketer_backend_production
