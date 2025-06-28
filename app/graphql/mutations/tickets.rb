@@ -29,8 +29,10 @@ module Mutations
 
 
       if ticket.save
-        puts "the fucking ticket was created and it is >>> #{ticket}"
-        AssignTicketJob.perform_later(ticket.id)
+        # cannot set this up becuase i am on renders free tier
+        # AssignTicketJob.perform_later(ticket.id)
+        #
+        TicketAssignmentService.new(ticket).call
         { ticket: ticket, errors: [] }
       else
         { ticket: nil, errors: ticket.errors.full_messages }
