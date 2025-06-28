@@ -75,3 +75,6 @@ gem "jwt"
 gem "sidekiq"
 gem "redis"
 gem "whenever", require: false
+
+gem "cloudinary", "~> 2.3"
+gem 'apollo_upload_server'  # Correct gem for GraphQL multipart uploads

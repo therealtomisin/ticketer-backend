@@ -13,12 +13,29 @@ class TicketMailer < ApplicationMailer
     mail(to: @user.email, subject: "Your Ticket ##{ticket.ticket_key} Has Been Updated")
   end
 
-  def comment_added(ticket, comment)
+  # def comment_added(ticket, comment)
+  #   @ticket = ticket
+  #   @comment = comment
+  #   @user = ticket.user
+  #   mail(to: @user.email, subject: "A New Comment on Your Ticket ##{ticket.ticket_key}")
+  # end
+  #
+  def comment_notification(recipient, ticket, comment)
+    @recipient = recipient
     @ticket = ticket
     @comment = comment
-    @user = ticket.user
-    mail(to: @user.email, subject: "A New Comment on Your Ticket ##{ticket.ticket_key}")
+
+    # Dynamic subject
+    subject_line =
+      if recipient.is_a?(Agent)
+        "A user responded to ticket ##{ticket.id}"
+      else
+        "An agent responded to your ticket ##{ticket.id}"
+      end
+
+    mail(to: recipient.email, subject: subject_line)
   end
+
 
   def ticket_assigned(ticket, agent)
     puts "why not >> #{agent.firstname}"

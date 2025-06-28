@@ -7,39 +7,54 @@ class CreateComment < BaseMutation
   field :comment, Types::CommentType, null: true
   field :message, String, null: false
 
-  def resolve(ticket_id:, content:)
-    user = authenticated_user!
+def resolve(ticket_id:, content:)
+  user = authenticated_user!
+  ticket = Ticket.find_by(id: ticket_id)
+  raise GraphQL::ExecutionError, "Ticket not found" unless ticket
 
-    ticket = Ticket.find_by(id: ticket_id)
-    raise GraphQL::ExecutionError, "Ticket not found" unless ticket
+  if Ticket::DELETED_STATUSES.include?(ticket.status)
+    raise GraphQL::ExecutionError, "Cannot comment on a ticket with status #{ticket.status}"
+  end
 
-    if Ticket::DELETED_STATUSES.include?(ticket.status)
-      raise GraphQL::ExecutionError, "Cannot comment on a ticket with status #{ticket.status}"
-    end
+  # Authorization check: only ticket creator or assigned agent can comment
+  unless (user.is_a?(User) && ticket.created_by_id == user.id) ||
+         (user.is_a?(Agent) && ticket.assigned_to_id == user.id)
+    raise GraphQL::ExecutionError, "You are not authorized to comment on this ticket"
+  end
 
-    # Prevent user comment if no agent has commented yet
-    if user.is_a?(User)
-      agent_comment_exists = ticket.comments.where(created_by_type: "Agent").exists?
-      unless agent_comment_exists
-        raise GraphQL::ExecutionError, "You can only comment after an agent has responded"
-      end
-    end
-
-    comment = Comment.new(
-      content: content,
-      created_by: user,
-      ticket: ticket
-    )
-
-    if comment.save
-      {
-        comment: comment,
-        message: "Comment created successfully"
-      }
-    else
-      raise GraphQL::ExecutionError, comment.errors.full_messages.join(", ")
+  # Business rule: User cannot comment unless an agent has commented
+  if user.is_a?(User)
+    agent_has_commented = ticket.comments.where(created_by_type: "Agent").exists?
+    unless agent_has_commented
+      raise GraphQL::ExecutionError, "You can only comment after an agent has responded"
     end
   end
+
+  comment = Comment.new(
+    content: content,
+    created_by: user,
+    ticket: ticket
+  )
+
+  if comment.save
+    # Notify the other party
+    recipient =
+      if user.is_a?(Agent)
+        ticket.created_by
+      else
+        ticket.assigned_to
+      end
+
+    TicketMailer.comment_notification(recipient, ticket, comment).deliver_later if recipient
+
+    {
+      comment: comment,
+      message: "Comment created successfully"
+    }
+  else
+    raise GraphQL::ExecutionError, comment.errors.full_messages.join(", ")
+  end
+end
 end
 
 

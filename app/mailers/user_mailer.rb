@@ -30,12 +30,10 @@ class UserMailer < ApplicationMailer
     )
   end
 
-  def welcome_email(user)
-    @user = user
-    puts "this email service was intiated"
-    mail(
-      to: @user.email,
-      subject: "Welcome to our platform!"
-    )
-  end
+def welcome_email(account, verification_code)
+  @account = account
+  @verification_code = verification_code
+  puts "Sending welcome email to #{@account.firstname} with code #{@verification_code}"
+  mail(to: @account.email, subject: "Welcome! Your verification code")
+end
 end
