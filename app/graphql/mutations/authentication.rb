@@ -6,6 +6,7 @@ class Signup < BaseMutation
   argument :firstname, String, required: true
   argument :lastname, String, required: true
   argument :type, String, required: true # "user" or "agent"
+  argument :role, String, required: false # Only for agents
 
   field :user, Types::UserType, null: true
   field :agent, Types::AgentType, null: true
@@ -14,7 +15,7 @@ class Signup < BaseMutation
   field :message, String, null: true
   field :expires_in, Integer, null: true
 
-  def resolve(email:, password:, firstname:, lastname:, type:)
+  def resolve(email:, password:, firstname:, lastname:, type:, role: nil)
     # Validate type
     unless %w[user agent].include?(type.downcase)
        {
@@ -36,20 +37,22 @@ end
     # Create the appropriate model based on type
     account = case type.downcase
     when "user"
-                User.new(
-                  email: email.downcase.strip,
-                  password: password,
-                  firstname: firstname.strip,
-                  lastname: lastname.strip
-                )
+      User.new(
+        email: email.downcase.strip,
+        password: password,
+        firstname: firstname.strip,
+        lastname: lastname.strip
+      )
     when "agent"
-                Agent.new(
-                  email: email.downcase.strip,
-                  password: password,
-                  firstname: firstname.strip,
-                  lastname: lastname.strip
-                )
+      Agent.new(
+        email: email.downcase.strip,
+        password: password,
+        firstname: firstname.strip,
+        lastname: lastname.strip,
+        role: role.presence || "ADMIN"
+      )
     end
+
 
     puts "<<<<<<<<<<<<<<<<<<<<<<<<<<,the saved account is #{account.email}"
 
