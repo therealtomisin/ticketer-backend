@@ -4,7 +4,10 @@ class TicketAssignmentService
   end
 
   def call
+    puts "the ticket email service has been initiated"
     return unless @ticket
+
+    puts "calling the callmethod to assign agent to ticket #{@ticket.ticketKey}"
 
     # Step 1 & 2: Get an agent without an active ticket in a single query
     agent = Agent.left_joins(:assigned_tickets)

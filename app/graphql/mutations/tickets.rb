@@ -32,6 +32,7 @@ module Mutations
         # cannot set this up becuase i am on renders free tier
         # AssignTicketJob.perform_later(ticket.id)
         #
+        puts "assigning tticket to an agent"
         TicketAssignmentService.new(ticket).call
         { ticket: ticket, errors: [] }
       else
