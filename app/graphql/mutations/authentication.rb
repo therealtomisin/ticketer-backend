@@ -54,7 +54,11 @@ end
     puts "<<<<<<<<<<<<<<<<<<<<<<<<<<,the saved account is #{account.email}"
 
         if account.save
-          token = JsonWebToken.encode({ user_id: account.id })
+          token = JsonWebToken.encode({
+            id: account.id,
+            type: type.upcase, # e.g., "USER" or "AGENT",
+            **(account.is_a?(Agent) ? { role: account.role } : {})
+          })
 
           UserMailer.welcome_email(account).deliver_now
 
