@@ -88,65 +88,141 @@ puts "got here about to send mail #{account.firstname} >>>>>>>>>>>>>>>>>>>>>>>>>
 end
 end
 
-    class Login < BaseMutation
-      argument :email, String, required: true
-      argument :password, String, required: true
-      argument :type, String, required: true # "user" or "agent"
+class Login < BaseMutation
+        argument :email, String, required: true
+        argument :password, String, required: true
+        argument :type, String, required: true # "user" or "agent"
 
-      field :user, Types::UserType, null: true
-      field :agent, Types::AgentType, null: true
-      field :token, String, null: true
-      field :success, Boolean, null: false
-      field :message, String, null: true
-      field :expires_in, Integer, null: true
+        field :user, Types::UserType, null: true
+        field :agent, Types::AgentType, null: true
+        field :token, String, null: true
+        field :success, Boolean, null: false
+        field :message, String, null: true
+        field :expires_in, Integer, null: true
 
-      def resolve(email:, password:, type:)
-        klass = case type.downcase
-        when "user" then User
-        when "agent" then Agent
-        else
-                  raise GraphQL::ExecutionError, "Invalid type provided: must be 'user' or 'agent'"
-        end
+  def resolve(email:, password:, type:)
+  klass = case type.downcase
+  when "user" then User
+  when "agent" then Agent
+  else
+            raise GraphQL::ExecutionError, "Invalid type provided: must be 'user' or 'agent'"
+  end
 
-        user_or_agent = klass.find_by(email: email.downcase.strip)
+  account = klass.find_by(email: email.downcase.strip)
 
-        puts "👤 Type: #{type}, Lookup: #{klass}, Found: #{user_or_agent&.email}"
+  puts "👤 Type: #{type}, Lookup: #{klass}, Found: #{account&.email}"
 
-        if user_or_agent&.authenticate(password)
+  if account&.authenticate(password)
+    unless account.isVerified
+      verification_code = rand(10000..99999).to_s
 
-          puts "the user is >>> #{user_or_agent} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+      token = JsonWebToken.encode({
+        code: verification_code,
+        type: type,
+        id: account.id
+      }, 30.minutes.from_now.to_i)
 
-          token = JsonWebToken.encode({
-            id: user_or_agent.id,
-            type: type.upcase, # e.g., "USER" or "AGENT",
-            **(user_or_agent.is_a?(Agent) ? { role: user_or_agent.role } : {})
-          })
+      puts "📨 Sending verification email to #{account.email} >>>>>>>>>>>>>>>>>>>>>>>>>>"
 
-          puts "✅ Authenticated #{type}: #{user_or_agent.inspect}"
+      UserMailer.welcome_email(account, verification_code).deliver_now
 
-          {
-            user: type == "user" ? user_or_agent : nil,
-            agent: type == "agent" ? user_or_agent : nil,
-            token: token,
-            success: true,
-            message: "Login successful",
-            expires_in: 24.hours.to_i
-          }
-        else
-          puts "❌ Invalid login for #{type} with email: #{email}"
-          {
-            success: false,
-            message: "Invalid email or password"
-          }
-        end
-      rescue StandardError => e
-        puts "🔥 Exception during login: #{e.message}"
-        {
-          success: false,
-          message: "Login failed: #{e.message}"
-        }
-      end
+      return {
+        success: false,
+        message: "Account not verified. Verification code sent to email.",
+        token: token,
+        expires_in: 30.minutes.to_i,
+        user: nil,
+        agent: nil
+      }
     end
+
+    token = JsonWebToken.encode({
+      id: account.id,
+      type: type.upcase,
+      **(account.is_a?(Agent) ? { role: account.role } : {})
+    })
+
+    puts "✅ Authenticated #{type}: #{account.inspect}"
+
+    {
+      user: type == "user" ? account : nil,
+      agent: type == "agent" ? account : nil,
+      token: token,
+      success: true,
+      message: "Login successful",
+      expires_in: 24.hours.to_i
+    }
+  else
+    puts "❌ Invalid login for #{type} with email: #{email}"
+    {
+      success: false,
+      message: "Invalid email or password",
+      token: nil,
+      expires_in: nil,
+      user: nil,
+      agent: nil
+    }
+  end
+  rescue StandardError => e
+  puts "🔥 Exception during login: #{e.message}"
+  {
+    success: false,
+    message: "Login failed: #{e.message}",
+    token: nil,
+    expires_in: nil,
+    user: nil,
+    agent: nil
+  }
+  end
+
+
+  # def resolve(email:, password:, type:)
+  #   klass = case type.downcase
+  #   when "user" then User
+  #   when "agent" then Agent
+  #   else
+  #             raise GraphQL::ExecutionError, "Invalid type provided: must be 'user' or 'agent'"
+  #   end
+
+  #   user_or_agent = klass.find_by(email: email.downcase.strip)
+
+  #   puts "👤 Type: #{type}, Lookup: #{klass}, Found: #{user_or_agent&.email}"
+
+  #   if user_or_agent&.authenticate(password)
+
+  #     puts "the user is >>> #{user_or_agent} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+
+  #     token = JsonWebToken.encode({
+  #       id: user_or_agent.id,
+  #       type: type.upcase, # e.g., "USER" or "AGENT",
+  #       **(user_or_agent.is_a?(Agent) ? { role: user_or_agent.role } : {})
+  #     })
+
+  #     puts "✅ Authenticated #{type}: #{user_or_agent.inspect}"
+
+  #     {
+  #       user: type == "user" ? user_or_agent : nil,
+  #       agent: type == "agent" ? user_or_agent : nil,
+  #       token: token,
+  #       success: true,
+  #       message: "Login successful",
+  #       expires_in: 24.hours.to_i
+  #     }
+  #   else
+  #     puts "❌ Invalid login for #{type} with email: #{email}"
+  #     {
+  #       success: false,
+  #       message: "Invalid email or password"
+  #     }
+  #   end
+  # rescue StandardError => e
+  #   puts "🔥 Exception during login: #{e.message}"
+  #   {
+  #     success: false,
+  #     message: "Login failed: #{e.message}"
+  #   }
+  # end
+end
 
       class VerifyToken < BaseMutation
       argument :code, String, required: true
