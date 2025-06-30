@@ -1,6 +1,6 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "*"  # Or restrict to your Vue app origin
+    origins ENV.fetch("FRONTEND_URL"), ENV.fetch("ADMIN_URL_URL")
 
     resource "*",
       headers: :any,

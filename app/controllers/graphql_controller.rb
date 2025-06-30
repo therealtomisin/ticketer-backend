@@ -55,9 +55,6 @@ class GraphqlController < ApplicationController
     auth_token = request.headers["Authorization"]&.split(" ")&.last
     return nil unless auth_token
 
-    puts "the auth token is >>> #{auth_token}"
-  puts "the auth token is >>> #{auth_token}"
-
   payload = JsonWebToken.decode(auth_token) rescue nil
 
   puts "the payload is >>> #{payload}"
@@ -70,8 +67,8 @@ class GraphqlController < ApplicationController
     auth_token = request.headers["Authorization"]&.split(" ")&.last
     return nil unless auth_token
 
-    puts "the auth token is >>> #{auth_token}"
-  puts "the auth token is >>> #{auth_token}"
+
+
 
   payload = JsonWebToken.decode(auth_token) rescue nil
 

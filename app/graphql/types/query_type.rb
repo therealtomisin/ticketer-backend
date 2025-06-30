@@ -1,28 +1,5 @@
 # # frozen_string_literal: true
 
-# module Types
-#   class QueryType < Types::BaseObject
-#     # get users
-#     field :users, [ Types::UserType ], null: false
-
-#     def users
-#       User.all
-#     end
-
-#     field :user, Types::UserType, null: false do
-#       argument :id, ID, required: true
-#     end
-
-#     def user(id:)
-#       User.find(id)
-#     end
-
-
-#   end
-# end
-
-# frozen_string_literal: true
-
 module Types
   class QueryType < Types::BaseObject
     ### --- Users ---
@@ -59,7 +36,6 @@ module Types
 
 ### --- Tickets ---
 field :tickets_by_user, [ Types::TicketType ], null: false do
-  puts "Got here nigga"
   argument :status, String, required: false
   argument :has_user_deleted, Boolean, required: false
   # argument :user_id, ID, required: false
