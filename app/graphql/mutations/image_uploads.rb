@@ -25,7 +25,7 @@
 # end
 
 module Mutations
-  class UploadImage < BaseMutation
+  class ImageUploads < BaseMutation
     argument :file_data, String, required: true  # Base64 encoded string
     argument :filename, String, required: true
 

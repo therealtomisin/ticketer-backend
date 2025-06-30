@@ -14,6 +14,6 @@ module Types
     field :delete_comment, mutation: Mutations::Comments::DeleteComment, description: "delete a new comment"
 
     # file mutations
-    # field :upload_image, mutation: Mutations::UploadImage, description: "Upload an image file"
+    field :upload_image, mutation: Mutations::ImageUploads, description: "Upload an image file"
   end
 end
