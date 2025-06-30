@@ -11,3 +11,39 @@
 2025-06-30 04:36:20.577 WAT [10164] FATAL:  database "ticketer_backend_development" does not exist
 2025-06-30 04:38:10.329 WAT [10133] LOG:  checkpoint starting: time
 2025-06-30 04:39:52.357 WAT [10133] LOG:  checkpoint complete: wrote 1020 buffers (6.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=101.882 s, sync=0.115 s, total=102.029 s; sync files=392, longest=0.007 s, average=0.001 s; distance=4932 kB, estimate=4932 kB; lsn=0/19BB3A8, redo lsn=0/19BB318
+2025-06-30 04:57:41.892 WAT [10133] LOG:  checkpoint starting: immediate force wait
+2025-06-30 04:57:41.940 WAT [10133] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.004 s, total=0.049 s; sync files=1, longest=0.004 s, average=0.004 s; distance=1 kB, estimate=4439 kB; lsn=0/19BB800, redo lsn=0/19BB7A8
+2025-06-30 04:59:10.979 WAT [10133] LOG:  checkpoint starting: immediate force wait
+2025-06-30 04:59:11.099 WAT [10133] LOG:  checkpoint complete: wrote 931 buffers (5.7%); 0 WAL file(s) added, 0 removed, 1 recycled; write=0.021 s, sync=0.078 s, total=0.120 s; sync files=300, longest=0.021 s, average=0.001 s; distance=8922 kB, estimate=8922 kB; lsn=0/2272218, redo lsn=0/22721C0
+2025-06-30 04:59:11.126 WAT [10133] LOG:  checkpoint starting: immediate force wait
+2025-06-30 04:59:11.150 WAT [10133] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.005 s, total=0.025 s; sync files=2, longest=0.003 s, average=0.003 s; distance=1 kB, estimate=8030 kB; lsn=0/2272828, redo lsn=0/22727D0
+2025-06-30 05:02:20.989 WAT [10133] LOG:  checkpoint starting: immediate force wait
+2025-06-30 05:02:21.175 WAT [10133] LOG:  checkpoint complete: wrote 931 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.051 s, sync=0.097 s, total=0.187 s; sync files=300, longest=0.006 s, average=0.001 s; distance=8922 kB, estimate=8922 kB; lsn=0/2B29318, redo lsn=0/2B292C0
+2025-06-30 05:02:21.301 WAT [10133] LOG:  checkpoint starting: immediate force wait
+2025-06-30 05:02:21.326 WAT [10133] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.004 s, total=0.026 s; sync files=2, longest=0.003 s, average=0.002 s; distance=1 kB, estimate=8030 kB; lsn=0/2B29A50, redo lsn=0/2B299F8
+2025-06-30 08:25:42.469 WAT [10133] LOG:  checkpoint starting: time
+2025-06-30 08:28:58.112 WAT [10133] LOG:  checkpoint complete: wrote 1946 buffers (11.9%); 0 WAL file(s) added, 0 removed, 1 recycled; write=194.867 s, sync=0.505 s, total=195.644 s; sync files=760, longest=0.013 s, average=0.001 s; distance=9327 kB, estimate=9327 kB; lsn=0/3445738, redo lsn=0/34456A8
+2025-06-30 08:30:42.214 WAT [10133] LOG:  checkpoint starting: time
+2025-06-30 08:30:43.993 WAT [10133] LOG:  checkpoint complete: wrote 18 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.717 s, sync=0.027 s, total=1.779 s; sync files=14, longest=0.014 s, average=0.002 s; distance=66 kB, estimate=8401 kB; lsn=0/3455F48, redo lsn=0/3455EF0
+2025-06-30 08:41:19.130 WAT [10133] LOG:  checkpoint starting: immediate force wait
+2025-06-30 08:41:19.160 WAT [10133] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.005 s, total=0.030 s; sync files=1, longest=0.005 s, average=0.005 s; distance=1 kB, estimate=7561 kB; lsn=0/3456730, redo lsn=0/34566D8
+2025-06-30 08:41:19.231 WAT [10133] LOG:  checkpoint starting: immediate force wait
+2025-06-30 08:41:19.271 WAT [10133] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.009 s, total=0.041 s; sync files=2, longest=0.005 s, average=0.005 s; distance=2 kB, estimate=6805 kB; lsn=0/3456F90, redo lsn=0/3456F38
+2025-06-30 08:45:11.933 WAT [10133] LOG:  checkpoint starting: immediate force wait
+2025-06-30 08:45:12.072 WAT [10133] LOG:  checkpoint complete: wrote 931 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.030 s, sync=0.084 s, total=0.140 s; sync files=300, longest=0.008 s, average=0.001 s; distance=8930 kB, estimate=8930 kB; lsn=0/3D0F7D8, redo lsn=0/3D0F780
+2025-06-30 08:45:12.222 WAT [10133] LOG:  checkpoint starting: immediate force wait
+2025-06-30 08:45:12.259 WAT [10133] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.007 s, sync=0.007 s, total=0.038 s; sync files=2, longest=0.005 s, average=0.004 s; distance=2 kB, estimate=8037 kB; lsn=0/3D10178, redo lsn=0/3D10120
+2025-06-30 08:50:12.361 WAT [10133] LOG:  checkpoint starting: time
+2025-06-30 08:51:33.210 WAT [10133] LOG:  checkpoint complete: wrote 1339 buffers (8.2%); 0 WAL file(s) added, 0 removed, 1 recycled; write=80.590 s, sync=0.217 s, total=80.850 s; sync files=300, longest=0.009 s, average=0.001 s; distance=8932 kB, estimate=8932 kB; lsn=0/45C9E98, redo lsn=0/45C94F0
+2025-06-30 08:51:33.213 WAT [10133] LOG:  checkpoint starting: immediate force wait
+2025-06-30 08:51:33.252 WAT [10133] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.006 s, total=0.040 s; sync files=1, longest=0.006 s, average=0.006 s; distance=2 kB, estimate=8039 kB; lsn=0/45C9F68, redo lsn=0/45C9F10
+2025-06-30 08:51:33.343 WAT [10133] LOG:  checkpoint starting: immediate force wait
+2025-06-30 08:51:33.392 WAT [10133] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.009 s, sync=0.008 s, total=0.050 s; sync files=2, longest=0.006 s, average=0.004 s; distance=2 kB, estimate=7236 kB; lsn=0/45CAA30, redo lsn=0/45CA9D8
+2025-06-30 08:52:38.548 WAT [11814] ERROR:  relation "solid_queue_processes" already exists
+2025-06-30 08:52:38.548 WAT [11814] STATEMENT:  CREATE TABLE "solid_queue_processes" ("id" character varying NOT NULL PRIMARY KEY, "kind" character varying NOT NULL, "name" character varying NOT NULL, "pid" integer NOT NULL, "hostname" character varying, "metadata" text, "supervisor_id" bigint, "last_heartbeat_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TicketerBackend'*/
+2025-06-30 08:56:33.495 WAT [10133] LOG:  checkpoint starting: time
+2025-06-30 08:59:45.104 WAT [10133] LOG:  checkpoint complete: wrote 1902 buffers (11.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=191.046 s, sync=0.525 s, total=191.609 s; sync files=678, longest=0.006 s, average=0.001 s; distance=8923 kB, estimate=8923 kB; lsn=0/4E88280, redo lsn=0/4E81988
+2025-06-30 09:42:50.669 WAT [12221] ERROR:  relation "solid_queue_processes" already exists
+2025-06-30 09:42:50.669 WAT [12221] STATEMENT:  CREATE TABLE "solid_queue_processes" ("id" character varying NOT NULL PRIMARY KEY, "kind" character varying NOT NULL, "name" character varying NOT NULL, "pid" integer NOT NULL, "hostname" character varying, "metadata" text, "supervisor_id" bigint, "last_heartbeat_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TicketerBackend'*/
+2025-06-30 09:46:33.679 WAT [10133] LOG:  checkpoint starting: time
+2025-06-30 09:46:37.261 WAT [10133] LOG:  checkpoint complete: wrote 35 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.510 s, sync=0.028 s, total=3.586 s; sync files=22, longest=0.009 s, average=0.002 s; distance=68 kB, estimate=8038 kB; lsn=0/4E92AC8, redo lsn=0/4E92A70
