@@ -1,0 +1,13 @@
+2025-06-30 04:33:10.233 WAT [10132] LOG:  starting PostgreSQL 17.5 (Ubuntu 17.5-1.pgdg24.04+1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0, 64-bit
+2025-06-30 04:33:10.234 WAT [10132] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-06-30 04:33:10.238 WAT [10132] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-06-30 04:33:10.246 WAT [10135] LOG:  database system was shut down at 2025-06-30 04:32:34 WAT
+2025-06-30 04:33:10.252 WAT [10132] LOG:  database system is ready to accept connections
+2025-06-30 04:34:50.567 WAT [10151] ERROR:  syntax error at or near "SELECT" at character 20
+2025-06-30 04:34:50.567 WAT [10151] STATEMENT:  SELECT version()
+	q
+	SELECT version() q
+	SELECT version();
+2025-06-30 04:36:20.577 WAT [10164] FATAL:  database "ticketer_backend_development" does not exist
+2025-06-30 04:38:10.329 WAT [10133] LOG:  checkpoint starting: time
+2025-06-30 04:39:52.357 WAT [10133] LOG:  checkpoint complete: wrote 1020 buffers (6.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=101.882 s, sync=0.115 s, total=102.029 s; sync files=392, longest=0.007 s, average=0.001 s; distance=4932 kB, estimate=4932 kB; lsn=0/19BB3A8, redo lsn=0/19BB318

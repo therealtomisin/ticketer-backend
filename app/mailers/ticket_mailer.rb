@@ -46,11 +46,13 @@ class TicketMailer < ApplicationMailer
     mail(to: @agent.email, subject: "You’ve Been Assigned to Ticket ##{ticket.ticket_key}")
   end
 
-  def outstanding_tickets_reminder(agent, tickets)
-    @agent = agent
-    @tickets = tickets
-    mail(to: agent.email, subject: "Daily ticket report! ✅")
-  end
+    def outstanding_tickets_reminder(agent_id, ticket_ids)
+    @agent = Agent.find(agent_id)
+    @tickets = Ticket.where(id: ticket_ids)
+
+    mail(to: @agent.email, subject: "You have outstanding tickets")
+    end
+
 
   def ticket_auto_closed(ticket)
     @ticket = ticket

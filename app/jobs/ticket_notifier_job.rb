@@ -3,10 +3,10 @@ class TicketNotifierJob < ApplicationJob
 
   def perform
     Agent.find_each do |agent|
-      active_tickets = agent.tickets.where(status: "ACTIVE")
+      active_ticket_ids = agent.assigned_tickets.where(status: "ACTIVE").pluck(:id)
 
-      if active_tickets.exists?
-        TicketMailer.outstanding_tickets_reminder(agent, active_tickets).deliver_later
+      if active_ticket_ids.any?
+        TicketMailer.outstanding_tickets_reminder(agent.id, active_ticket_ids).deliver_now
       end
     end
   end

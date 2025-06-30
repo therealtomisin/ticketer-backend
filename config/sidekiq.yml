@@ -1,2 +1,4 @@
-:queues:
-  - default
+:schedule:
+  ticket_notifier_job:
+    cron: "*/10 * * * *" # Every 10 minutes
+    class: TicketNotifierJob

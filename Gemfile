@@ -73,8 +73,17 @@ gem "bcrypt", "~> 3.1.7"
 gem "rack-cors"
 gem "jwt"
 gem "sidekiq"
+gem "sidekiq-scheduler"
+gem "rails-scheduler"
 gem "redis"
 gem "whenever", require: false
 
 gem "cloudinary", "~> 2.3"
-gem 'apollo_upload_server'  # Correct gem for GraphQL multipart uploads
+gem "apollo_upload_server"  # Correct gem for GraphQL multipart uploads
+
+# Gemfile
+group :development, :test do
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "database_cleaner-active_record"
+end
