@@ -24,8 +24,14 @@ default: &default
   port: 5432
 
 development:
-  <<: *default
-  database: ticketer_backend_development
+  primary: &primary
+    <<: *default
+    database: ticketer_backend_development
+
+  queue:
+    <<: *primary
+    database: ticketer_backend_development_queue
+    migrations_paths: db/queue_migrate
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -38,7 +44,7 @@ development:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
-  # domain sockets, so uncomment these lines.
+  # domain sockets, so rails uncomment these lines.
   #host: localhost
 
   # The TCP port the server listens on. Defaults to 5432.
