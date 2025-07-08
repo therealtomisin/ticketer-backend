@@ -7,8 +7,11 @@ module Mutations
 
     field :ticket, Types::TicketType, null: true
     field :errors, [ String ], null: false
+    field :success, Boolean, null: false
+    field :message, String, null: false
 
     def resolve(title:, content:, media: [])
+      puts "we have gotten to the creation stage"
       creator = context[:current_user]
 
       return { ticket: nil, errors: [ "Authentication required" ] } unless creator
@@ -34,9 +37,9 @@ module Mutations
         #
         puts "assigning tticket to an agent"
         TicketAssignmentService.new(ticket).call
-        { ticket: ticket, errors: [] }
+        { ticket: ticket, errors: [], success: true, message: "Ticket created succesfully" }
       else
-        { ticket: nil, errors: ticket.errors.full_messages }
+        { ticket: nil, errors: ticket.errors.full_messages, success: false, message: "Failed to create ticket" }
       end
     end
     end
