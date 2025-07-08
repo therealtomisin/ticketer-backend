@@ -45,7 +45,7 @@ def resolve(ticket_id:, content:)
         ticket.assigned_to
       end
 
-    TicketMailer.comment_notification(recipient, ticket, comment).deliver_later if recipient
+    TicketMailer.comment_notification(recipient, ticket, comment).deliver_now if recipient
 
     {
       comment: comment,
